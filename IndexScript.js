@@ -156,7 +156,17 @@ btn.onclick = function () {
   let jogador = jogadores[vez];
   let peao = document.getElementById("peao" + vez);
   let posAntiga = jogador.pos;
-  let novaPos = Math.min(jogador.pos + valor, 30);
+
+  // Prevent passing boss spaces without defeating the boss
+  const bossSpaces = [5, 10, 19, 23, 29];
+  let nextBoss = bossSpaces.find((boss) => boss > posAntiga);
+  let maxAdvance = nextBoss !== undefined ? nextBoss : 30;
+  let tentativaPos = Math.min(jogador.pos + valor, 30);
+  // If player would pass a boss space without being exactly on it, stop at the boss
+  let novaPos = tentativaPos;
+  if (nextBoss !== undefined && tentativaPos > nextBoss && posAntiga < nextBoss) {
+    novaPos = nextBoss;
+  }
   jogador.pos = novaPos;
   setTimeout(() => {
     let casaAntiga = document.getElementById("casa" + posAntiga);
@@ -200,35 +210,11 @@ btn.onclick = function () {
     }
 
     if ([5, 10, 19, 23, 29].includes(novaPos)) {
-      if (jogador.firewall) {
-        alert(
-          `${jogador.nome} used a FIREWALL and was protected from the boss!`
-        );
-        jogador.firewall = false;
-      } else {
-        alert(`${jogador.nome} was defeated by the boss and returns to START!`);
-        let containerAtual = casaNova.querySelector(".peoes-container");
-        if (containerAtual && containerAtual.contains(peao)) {
-          containerAtual.removeChild(peao);
-        }
-        let casaStart = document.getElementById("casa0");
-        let containerStart = casaStart.querySelector(".peoes-container");
-        if (!containerStart) {
-          containerStart = document.createElement("div");
-          containerStart.className = "peoes-container";
-          containerStart.style.display = "flex";
-          containerStart.style.justifyContent = "center";
-          containerStart.style.alignItems = "flex-end";
-          containerStart.style.gap = "6px";
-          containerStart.style.width = "100%";
-          containerStart.style.position = "absolute";
-          containerStart.style.bottom = "18px";
-          containerStart.style.left = "0";
-          casaStart.appendChild(containerStart);
-        }
-        containerStart.appendChild(peao);
-        jogador.pos = 0;
-      }
+      // Open boss fight popup or window
+      window.open(`chefes/chefe1/chefe.html?player=${encodeURIComponent(jogador.nome)}&color=${encodeURIComponent(jogador.cor)}&firewall=${jogador.firewall ? 1 : 0}&boss=${novaPos}`, '_blank', 'width=700,height=700');
+      // Pause turn advancement until boss fight is resolved
+      animando = false;
+      return;
     }
 
     if ([2, 8, 14, 18, 22, 27].includes(novaPos)) {
@@ -280,3 +266,16 @@ btn.onclick = function () {
     }
   }, 600);
 };
+
+window.addEventListener('message', function(event) {
+  if (event.data && event.data.bossDefeated) {
+    vez = (vez + 1) % jogadores.length;
+    atualizarJogadorAtual();
+    animando = false;
+    setTimeout(() => {
+      btn.innerHTML = "🎲";
+      btn.title = "Roll Dice";
+      valorDadoSpan.textContent = "";
+    }, 900);
+  }
+});

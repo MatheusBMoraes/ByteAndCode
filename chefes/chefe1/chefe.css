@@ -1,0 +1,103 @@
+body {
+  background: linear-gradient(135deg, #2d2d6e 60%, #59189a 100%);
+  color: #fff;
+  font-family: 'PT Serif', serif;
+  margin: 0;
+  min-height: 100vh;
+}
+.boss-container {
+  max-width: 600px;
+  margin: 2rem auto;
+  background: rgba(30, 20, 60, 0.95);
+  border-radius: 18px;
+  box-shadow: 0 8px 32px #0008;
+  padding: 2rem 2.5rem 2.5rem 2.5rem;
+  text-align: center;
+}
+.boss-avatar {
+  font-size: 5rem;
+  margin: 1rem 0 0.5rem 0;
+}
+.boss-instructions {
+  margin-bottom: 1.5rem;
+  font-size: 1.2rem;
+}
+.phrasal {
+  color: #ffd700;
+  font-weight: bold;
+}
+.challenge-area {
+  margin: 1.5rem 0 2rem 0;
+}
+#question-area {
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+  font-weight: bold;
+}
+#answer {
+  font-size: 1.1rem;
+  padding: 0.5em 1em;
+  border-radius: 8px;
+  border: none;
+  margin-bottom: 0.5em;
+  width: 70%;
+  max-width: 320px;
+}
+#submit {
+  font-size: 1.1rem;
+  padding: 0.5em 1.5em;
+  border-radius: 8px;
+  border: none;
+  background: #ffd700;
+  color: #2d2d6e;
+  font-weight: bold;
+  cursor: pointer;
+  margin-left: 0.5em;
+  transition: background 0.2s;
+}
+#submit:disabled {
+  background: #aaa;
+  color: #fff;
+  cursor: not-allowed;
+}
+#feedback {
+  margin-top: 1em;
+  font-size: 1.1rem;
+}
+.correct {
+  color: #00ff99;
+  font-weight: bold;
+}
+.wrong {
+  color: #ff5555;
+  font-weight: bold;
+}
+.glossary {
+  background: #fff2;
+  border-radius: 12px;
+  margin-top: 2.5rem;
+  padding: 1.2rem 1rem 1.2rem 1.5rem;
+  text-align: left;
+}
+.glossary h2 {
+  color: #ffd700;
+  font-size: 1.3rem;
+  margin-bottom: 0.7rem;
+}
+.glossary ul {
+  list-style: disc inside;
+  font-size: 1.05rem;
+  color: #fff;
+  padding-left: 0.5rem;
+}
+.glossary li {
+  margin-bottom: 0.4em;
+}
+@media (max-width: 700px) {
+  .boss-container {
+    padding: 1rem 0.5rem 1.5rem 0.5rem;
+  }
+  #answer {
+    width: 95%;
+  }
+}

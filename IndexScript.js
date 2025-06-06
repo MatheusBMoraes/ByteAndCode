@@ -18,7 +18,6 @@ finish.textContent = "FINISH";
 finish.style.boxShadow = "0 0 25px orange";
 finish.style.border = "3px solid orange";
 
-
 // CASAS COM CHEFES
 const casasChefes = [5, 10, 19, 23, 29];
 casasChefes.forEach((casa) => {
@@ -34,7 +33,7 @@ casasPremios.forEach((casa) => {
   const casaElement = document.getElementById("casa" + casa);
   casaElement.style.boxShadow = "0 0 25px blue";
   casaElement.style.border = "3px solid blue";
-    casaElement.textContent = "🛡️";
+  casaElement.textContent = "🛡️";
 });
 
 // CASAS COM PENALIDADES
@@ -43,6 +42,7 @@ casasPenalidades.forEach((casa) => {
   const casaElement = document.getElementById("casa" + casa);
   casaElement.style.boxShadow = "0 0 25px yellow";
   casaElement.style.border = "3px solid yellow";
+  casaElement.textContent = "⚠️";
 });
 
 // CASAS SEM EFEITO

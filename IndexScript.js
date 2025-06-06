@@ -89,24 +89,38 @@ jogadores.forEach((jogador, idx) => {
 
 // Cria botão e dado
 const infDiv = document.querySelector('.inf') || document.body;
+
+// Seleciona ou cria a div do usuário (nome do jogador)
+let userDiv = document.querySelector('.inf .user');
+if (!userDiv) {
+  userDiv = document.createElement('div');
+  userDiv.className = 'user';
+  infDiv.appendChild(userDiv);
+}
+
+// Cria a div do dado
 let dadoDiv = document.createElement('div');
 dadoDiv.className = 'dado';
-dadoDiv.style.margin = '2rem';
-dadoDiv.style.fontSize = '2.5rem';
-dadoDiv.style.fontWeight = 'bold';
-dadoDiv.style.color = '#fff';
+
 let btn = document.createElement('button');
-btn.textContent = 'Jogar Dado';
-btn.style.fontSize = '2rem';
-btn.style.margin = '1rem';
-btn.style.padding = '0.5rem 2rem';
-btn.style.borderRadius = '10px';
-btn.style.border = 'none';
-btn.style.background = '#59189a';
-btn.style.color = '#fff';
-btn.style.cursor = 'pointer';
+btn.className = 'dado-botao';
+btn.innerHTML = '🎲';
+btn.title = 'Jogar Dado';
+btn.onpointerdown = () => btn.classList.add('ativo');
+btn.onpointerup = btn.onmouseleave = () => btn.classList.remove('ativo');
 dadoDiv.appendChild(btn);
+// Mostra valor do dado
+let valorDadoSpan = document.createElement('span');
+valorDadoSpan.className = 'valor-dado';
+dadoDiv.appendChild(valorDadoSpan);
+
+// Remove dadoDiv antigo se houver
+const dadoAntigo = document.querySelector('.inf .dado');
+if (dadoAntigo) dadoAntigo.remove();
+// Adiciona dadoDiv ao final da barra inferior
 infDiv.appendChild(dadoDiv);
+
+const facesDado = ['⚀','⚁','⚂','⚃','⚄','⚅'];
 
 let vez = 0;
 let animando = false;
@@ -115,7 +129,7 @@ let animando = false;
 function atualizarJogadorAtual() {
   const h1Jogador = document.querySelector('.inf .user h1');
   if (h1Jogador) {
-    h1Jogador.textContent = `Vez de: ${jogadores[vez].nome}`;
+    h1Jogador.innerHTML = `Vez de: <span style="color:${jogadores[vez].cor};text-shadow:1px 1px 2px #000;">${jogadores[vez].nome}</span>`;
   }
 }
 atualizarJogadorAtual();
@@ -150,9 +164,12 @@ function garantirLabelCasa(pos, label) {
 btn.onclick = function() {
   if (animando) return;
   animando = true;
+  btn.style.transform = 'scale(1.18) rotate(-10deg)';
+  setTimeout(() => btn.style.transform = '', 200);
   const valor = Math.floor(Math.random() * 6) + 1;
-  dadoDiv.textContent = `Dado: ${valor}`;
-  dadoDiv.appendChild(btn);
+  btn.innerHTML = facesDado[valor-1];
+  btn.title = `Dado: ${valor}`;
+  valorDadoSpan.innerHTML = `<span style=\"font-size:1.2rem;font-family:inherit;vertical-align:middle;\">Você tirou </span><span style=\"font-family:'PT Serif',serif;font-size:3rem;\">${valor}</span>`;
   let jogador = jogadores[vez];
   let peao = document.getElementById('peao' + vez);
   let posAntiga = jogador.pos;
@@ -184,9 +201,20 @@ btn.onclick = function() {
       containerNovo.style.left = '0';
       casaNova.appendChild(containerNovo);
     }
+    // Animação de chegada
+    peao.animate([
+      { transform: 'scale(1.2)', filter: 'brightness(1.2)' },
+      { transform: 'scale(1)', filter: 'brightness(1)' }
+    ], { duration: 350, easing: 'cubic-bezier(.4,2,.6,1)' });
     containerNovo.appendChild(peao);
     vez = (vez + 1) % jogadores.length;
     atualizarJogadorAtual();
     animando = false;
+    // Volta o botão para emoji de dado
+    setTimeout(() => {
+      btn.innerHTML = '🎲';
+      btn.title = 'Jogar Dado';
+      valorDadoSpan.textContent = '';
+    }, 900);
   }, 600);
 };

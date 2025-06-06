@@ -142,8 +142,9 @@ body {
   box-shadow: 0 4px 16px #59189a33, 0 1.5px 0 #fff inset;
   transition: transform 0.18s cubic-bezier(.4,2,.6,1), box-shadow 0.18s;
 }
-.dado-botao:active {
-  transform: scale(0.92);
+.dado-botao:active,
+.dado-botao.ativo {
+  transform: scale(0.92) rotate(-10deg);
 }
 
 .valor-dado {
@@ -154,4 +155,19 @@ body {
   min-width: 6.5rem;
   display: inline-block;
   vertical-align: middle;
+}
+
+@media (max-width: 700px) {
+  .dado {
+    margin: 0.5rem;
+    font-size: 1.3rem;
+  }
+  .dado-botao {
+    font-size: 2.2rem;
+    padding: 0.15em 0.4em;
+  }
+  .valor-dado {
+    font-size: 1.5rem;
+    min-width: 3.5rem;
+  }
 }

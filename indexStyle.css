@@ -15,14 +15,12 @@ body {
   background-attachment: fixed;
 }
 
-
-
 .tabuleiro {
   width: 100%;
   height: 100%;
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  grid-template-rows: repeat(7, 1fr);
+  grid-template-rows: repeat(8, 1fr);
   gap: 1rem;
   justify-items: center;
   padding: 0.5rem;
@@ -41,6 +39,7 @@ body {
   color: #fff;
   transition: transform 0.2s, box-shadow 0.2s;
   backdrop-filter: blur(5px);
+  position: relative;
 }
 
 .casa:hover {
@@ -54,7 +53,6 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  
 }
 
 .container h1 {
@@ -64,3 +62,60 @@ body {
   text-shadow: 2px 2px 4px orange;
 }
 
+.inf {
+  width: 100vw;
+  height: fit-content;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  background-color: #59189a99;
+  color: white;
+  backdrop-filter: blur(5px);
+  padding: 1.5rem;
+  z-index: 3;
+}
+
+.inf h1 {
+  font-family: "Alumni Sans SC", sans-serif;
+  font-size: 4rem;
+  margin: 0.5rem;
+}
+
+.casa-label {
+  display: block;
+  width: 100%;
+  text-align: center;
+  font-size: 2.2rem;
+  font-weight: bold;
+  color: orange;
+  margin-bottom: 0.2em;
+  letter-spacing: 2px;
+  pointer-events: none;
+}
+
+.peao {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 3px solid #fff;
+  margin: 2px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+  display: inline-block;
+  position: relative;
+  z-index: 3;
+  margin-top: 0.2em;
+}
+
+.peoes-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 6px;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  bottom: 18px;
+  pointer-events: none;
+}

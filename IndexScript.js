@@ -156,13 +156,9 @@ btn.onclick = function () {
   let jogador = jogadores[vez];
   let peao = document.getElementById("peao" + vez);
   let posAntiga = jogador.pos;
-
-  // Prevent passing boss spaces without defeating the boss
   const bossSpaces = [5, 10, 19, 23, 29];
   let nextBoss = bossSpaces.find((boss) => boss > posAntiga);
-  let maxAdvance = nextBoss !== undefined ? nextBoss : 30;
   let tentativaPos = Math.min(jogador.pos + valor, 30);
-  // If player would pass a boss space without being exactly on it, stop at the boss
   let novaPos = tentativaPos;
   if (nextBoss !== undefined && tentativaPos > nextBoss && posAntiga < nextBoss) {
     novaPos = nextBoss;
@@ -170,9 +166,7 @@ btn.onclick = function () {
   jogador.pos = novaPos;
   setTimeout(() => {
     let casaAntiga = document.getElementById("casa" + posAntiga);
-    let containerAntigo = casaAntiga
-      ? casaAntiga.querySelector(".peoes-container")
-      : null;
+    let containerAntigo = casaAntiga ? casaAntiga.querySelector(".peoes-container") : null;
     if (containerAntigo && containerAntigo.contains(peao)) {
       containerAntigo.removeChild(peao);
     }
@@ -193,27 +187,22 @@ btn.onclick = function () {
       containerNovo.style.left = "0";
       casaNova.appendChild(containerNovo);
     }
-    peao.animate(
-      [
-        { transform: "scale(1.2)", filter: "brightness(1.2)" },
-        { transform: "scale(1)", filter: "brightness(1)" },
-      ],
-      { duration: 350, easing: "cubic-bezier(.4,2,.6,1)" }
-    );
+    peao.animate([
+      { transform: "scale(1.2)", filter: "brightness(1.2)" },
+      { transform: "scale(1)", filter: "brightness(1)" }
+    ], { duration: 350, easing: "cubic-bezier(.4,2,.6,1)" });
     containerNovo.appendChild(peao);
 
     if ([3, 7, 12, 15, 20, 25].includes(novaPos)) {
       jogador.firewall = true;
-      alert(
-        `${jogador.nome} received a FIREWALL! You will be protected in your next boss battle.`
-      );
+      alert(`${jogador.nome} received a FIREWALL! You will be protected in your next boss battle.`);
     }
 
     if ([5, 10, 19, 23, 29].includes(novaPos)) {
-      // Open boss fight popup or window
-      window.open(`chefes/chefe1/chefe.html?player=${encodeURIComponent(jogador.nome)}&color=${encodeURIComponent(jogador.cor)}&firewall=${jogador.firewall ? 1 : 0}&boss=${novaPos}`, '_blank', 'width=700,height=700');
-      // Pause turn advancement until boss fight is resolved
-      animando = false;
+      setTimeout(() => {
+        showBossFightModal(novaPos, jogador);
+        animando = false;
+      }, 10);
       return;
     }
 
@@ -279,3 +268,74 @@ window.addEventListener('message', function(event) {
     }, 900);
   }
 });
+
+// BOSS FIGHT MODAL LOGIC
+function showBossFightModal(bossIndex, jogador) {
+  // Remove any existing modal
+  let oldModal = document.getElementById('boss-fight-modal');
+  if (oldModal) oldModal.remove();
+
+  // Create overlay
+  let overlay = document.createElement('div');
+  overlay.id = 'boss-fight-modal';
+  overlay.innerHTML = `
+    <div class="boss-modal-overlay"></div>
+    <div class="boss-modal-content">
+      <div class="boss-container">
+        <h1>Boss Fight: Phrasal Verbs in IT</h1>
+        <div class="boss-avatar">👹</div>
+        <div class="boss-instructions">
+          <p>To <b>defeat the boss</b> and move forward, you must answer the phrasal verb challenge below!</p>
+          <p><b>Tip:</b> These are common expressions in IT, like <span class="phrasal">log in</span>, <span class="phrasal">back up</span>, <span class="phrasal">set up</span>, <span class="phrasal">scroll down</span>, and more.</p>
+        </div>
+        <div class="challenge-area">
+          <div id="question-area"></div>
+          <input type="text" id="answer" placeholder="Type your answer here...">
+          <button id="submit">Submit</button>
+          <div id="feedback"></div>
+        </div>
+      </div>
+    </div>
+  `;
+  document.body.appendChild(overlay);
+
+  // Remove inline style injection for modal, rely on chefe.css
+  document.body.classList.add('boss-fight-active');
+
+  // Boss fight logic (from chefe.js)
+  const questions = [
+    { q: "What phrasal verb means 'to make a copy of your files to keep them safe'?", a: ["back up", "backup"] },
+    { q: "Which phrasal verb do you use to say 'enter your username and password to access a system'?", a: ["log in", "login"] },
+    { q: "What is the phrasal verb for 'prepare a new computer for use'?", a: ["set up", "setup"] },
+    { q: "Which phrasal verb means 'move down the page on your screen'?", a: ["scroll down"] },
+    { q: "If you want to connect your mouse to the computer, which phrasal verb do you use?", a: ["plug in"] },
+    { q: "What phrasal verb means 'turn off your computer'?", a: ["shut down"] },
+    { q: "Which phrasal verb means 'search for information online or in a dictionary'?", a: ["look up"] },
+    { q: "If your computer stops working, which phrasal verb describes this?", a: ["break down"] }
+  ];
+  let current = Math.floor(Math.random() * questions.length);
+  document.getElementById('question-area').textContent = questions[current].q;
+  document.getElementById('answer').focus();
+  document.getElementById('answer').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter' && !document.getElementById('submit').disabled) {
+      document.getElementById('submit').click();
+    }
+  });
+  document.getElementById('submit').onclick = function() {
+    const user = document.getElementById('answer').value.trim().toLowerCase();
+    const correct = questions[current].a.some(ans => user === ans);
+    const feedback = document.getElementById('feedback');
+    if (correct) {
+      feedback.innerHTML = '<span class="correct">Correct! You defeated the boss and can move forward!</span>';
+      document.getElementById('submit').disabled = true;
+      document.getElementById('answer').disabled = true;
+      setTimeout(() => {
+        document.body.classList.remove('boss-fight-active');
+        overlay.remove();
+        window.dispatchEvent(new MessageEvent('message', { data: { bossDefeated: true } }));
+      }, 1200);
+    } else {
+      feedback.innerHTML = '<span class="wrong">Try again! Check your answer and use a phrasal verb from IT context.</span>';
+    }
+  };
+}

@@ -1,101 +1,139 @@
 body {
-  background: linear-gradient(135deg, #2d2d6e 60%, #59189a 100%);
   color: #fff;
   font-family: 'PT Serif', serif;
   margin: 0;
   min-height: 100vh;
+  overflow-x: hidden;
+}
+.boss-modal-overlay {
+  position: fixed; left: 0; top: 0; width: 100vw; height: 100vh;
+  background: rgba(30,20,60,0.5);
+  backdrop-filter: blur(8px);
+  z-index: 1000;
+}
+.boss-modal-content {
+  position: fixed; left: 0; top: 0; width: 100vw; height: 100vh;
+  display: flex; align-items: center; justify-content: center;
+  z-index: 1001;
+  pointer-events: none;
 }
 .boss-container {
-  max-width: 600px;
-  margin: 2rem auto;
-  background: rgba(30, 20, 60, 0.95);
-  border-radius: 18px;
-  box-shadow: 0 8px 32px #0008;
-  padding: 2rem 2.5rem 2.5rem 2.5rem;
+  max-width: 420px;
+  width: 96vw;
+  margin: 0 auto;
+  background: rgba(30, 20, 60, 0.98);
+  border-radius: 22px;
+  box-shadow: 0 8px 32px #000a, 0 0 0 6px #ffd70033;
+  padding: 1.2rem 1.2rem 1.5rem 1.2rem;
   text-align: center;
+  position: relative;
+  animation: popin 0.7s cubic-bezier(.4,2,.6,1);
+  pointer-events: all;
+}
+@keyframes popin {
+  0% { transform: scale(0.7) translateY(60px); opacity: 0; }
+  100% { transform: scale(1) translateY(0); opacity: 1; }
 }
 .boss-avatar {
-  font-size: 5rem;
+  font-size: 5.5rem;
   margin: 1rem 0 0.5rem 0;
+  filter: drop-shadow(0 0 16px #ff0000cc);
+  animation: boss-bounce 1.2s infinite alternate cubic-bezier(.4,2,.6,1);
+}
+@keyframes boss-bounce {
+  0% { transform: scale(1.1) rotate(-5deg); }
+  100% { transform: scale(1) rotate(5deg); }
 }
 .boss-instructions {
-  margin-bottom: 1.5rem;
-  font-size: 1.2rem;
+  margin-bottom: 1.1rem;
+  font-size: 1.05rem;
+  background: #ffd70022;
+  border-radius: 10px;
+  padding: 0.5em 0.5em 0.5em 0.5em;
+  color: #fff;
+  box-shadow: 0 2px 8px #0002;
 }
 .phrasal {
   color: #ffd700;
   font-weight: bold;
+  text-shadow: 0 1px 2px #000a;
 }
 .challenge-area {
-  margin: 1.5rem 0 2rem 0;
+  margin: 1.1rem 0 1.2rem 0;
+  background: #fff1;
+  border-radius: 12px;
+  padding: 0.7rem 0.5rem 0.7rem 0.5rem;
+  box-shadow: 0 2px 8px #0002;
 }
 #question-area {
-  font-size: 1.3rem;
-  margin-bottom: 1rem;
+  font-size: 1.1rem;
+  margin-bottom: 0.7rem;
   font-weight: bold;
+  color: #ffd700;
+  text-shadow: 0 1px 2px #000a;
 }
 #answer {
-  font-size: 1.1rem;
-  padding: 0.5em 1em;
+  font-size: 1.05rem;
+  padding: 0.4em 0.8em;
   border-radius: 8px;
   border: none;
-  margin-bottom: 0.5em;
+  margin-bottom: 0.4em;
   width: 70%;
   max-width: 320px;
+  background: #fff;
+  color: #2d2d6e;
+  box-shadow: 0 1px 4px #0002;
+  outline: 2px solid #ffd70055;
+  transition: outline 0.2s;
+}
+#answer:focus {
+  outline: 2.5px solid #ffd700;
 }
 #submit {
-  font-size: 1.1rem;
-  padding: 0.5em 1.5em;
+  font-size: 1.05rem;
+  padding: 0.4em 1.1em;
   border-radius: 8px;
   border: none;
-  background: #ffd700;
+  background: linear-gradient(90deg, #ffd700 80%, #fffbe6 100%);
   color: #2d2d6e;
   font-weight: bold;
   cursor: pointer;
   margin-left: 0.5em;
-  transition: background 0.2s;
+  box-shadow: 0 2px 8px #ffd70044;
+  transition: background 0.2s, box-shadow 0.2s;
+}
+#submit:active {
+  background: #ffe066;
 }
 #submit:disabled {
   background: #aaa;
   color: #fff;
   cursor: not-allowed;
+  box-shadow: none;
 }
 #feedback {
-  margin-top: 1em;
-  font-size: 1.1rem;
+  margin-top: 0.7em;
+  font-size: 1.05rem;
+  min-height: 2em;
 }
 .correct {
   color: #00ff99;
   font-weight: bold;
+  text-shadow: 0 1px 2px #000a;
+  animation: correct-pop 0.7s cubic-bezier(.4,2,.6,1);
+}
+@keyframes correct-pop {
+  0% { transform: scale(1.2); opacity: 0.2; }
+  100% { transform: scale(1); opacity: 1; }
 }
 .wrong {
   color: #ff5555;
   font-weight: bold;
-}
-.glossary {
-  background: #fff2;
-  border-radius: 12px;
-  margin-top: 2.5rem;
-  padding: 1.2rem 1rem 1.2rem 1.5rem;
-  text-align: left;
-}
-.glossary h2 {
-  color: #ffd700;
-  font-size: 1.3rem;
-  margin-bottom: 0.7rem;
-}
-.glossary ul {
-  list-style: disc inside;
-  font-size: 1.05rem;
-  color: #fff;
-  padding-left: 0.5rem;
-}
-.glossary li {
-  margin-bottom: 0.4em;
+  text-shadow: 0 1px 2px #000a;
 }
 @media (max-width: 700px) {
   .boss-container {
-    padding: 1rem 0.5rem 1.5rem 0.5rem;
+    padding: 0.7rem 0.3rem 1rem 0.3rem;
   }
   #answer {
     width: 95%;

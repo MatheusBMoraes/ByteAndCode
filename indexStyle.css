@@ -1,0 +1,66 @@
+@import url("https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Alumni+Sans+SC:ital,wght@0,100..900;1,100..900&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-image: url("./assets/bg.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+
+
+.tabuleiro {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: repeat(7, 1fr);
+  gap: 1rem;
+  justify-items: center;
+  padding: 0.5rem;
+}
+
+.casa {
+  width: 180px;
+  height: 180px;
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "PT Serif", serif;
+  font-size: 3rem;
+  font-weight: bold;
+  color: #fff;
+  transition: transform 0.2s, box-shadow 0.2s;
+  backdrop-filter: blur(5px);
+}
+
+.casa:hover {
+  transform: scale(1.08);
+  z-index: 2;
+}
+
+.container {
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+}
+
+.container h1 {
+  font-family: "Alumni Sans SC", sans-serif;
+  font-size: 5rem;
+  color: #fff;
+  text-shadow: 2px 2px 4px orange;
+}
+

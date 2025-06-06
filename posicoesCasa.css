@@ -1,0 +1,125 @@
+/* Estilo para o grid de casas */
+#casa0 {
+  grid-column: 1/2;
+  grid-row: 1/2;
+}
+#casa1 {
+  grid-column: 2/3;
+  grid-row: 1/2;
+}
+#casa2 {
+  grid-column: 3/4;
+  grid-row: 1/2;  
+}
+#casa3 {
+  grid-column: 4/5;
+  grid-row: 1/2;
+}
+#casa4 {
+  grid-column: 5/6;
+  grid-row: 1/2;
+}
+#casa5 {
+  grid-column: 6/7;
+  grid-row: 1/2;
+}
+#casa6 {
+  grid-column: 7/8;
+  grid-row: 1/2;
+}
+#casa7 {
+  grid-column: 7/8;
+  grid-row: 2/3;
+}
+#casa8 {
+  grid-column: 7/8;
+  grid-row: 3/4;
+}
+#casa9 {
+  grid-column: 6/7;
+  grid-row: 3/4;
+}
+#casa10 {
+  grid-column: 5/6;
+  grid-row: 3/4;
+}
+#casa11 {
+  grid-column: 4/5;
+  grid-row: 3/4;
+}
+#casa12 {
+  grid-column: 3/4;
+  grid-row: 3/4;
+}
+#casa13 {
+  grid-column: 2/3;
+  grid-row: 3/4;
+}
+#casa14 {
+  grid-column: 1/2;
+  grid-row: 3/4;
+}
+#casa15 {
+  grid-column: 1/2;
+  grid-row: 4/5;
+}
+#casa16 {
+  grid-column: 1/2;
+  grid-row: 5/6;
+}
+#casa17 {
+  grid-column: 2/3;
+  grid-row: 5/6;
+}
+#casa18 {
+  grid-column: 3/4;
+  grid-row: 5/6;
+}
+#casa19 {
+  grid-column: 4/5;
+  grid-row: 5/6;
+}
+#casa20 {
+  grid-column: 5/6;
+  grid-row: 5/6;
+}
+#casa21 {
+  grid-column: 6/7;
+  grid-row: 5/6;
+}
+#casa22 {
+  grid-column: 7/8;
+  grid-row: 5/6;
+}
+#casa23 {
+  grid-column: 7/8;
+  grid-row: 6/7;
+}
+#casa24 {
+  grid-column: 7/8;
+  grid-row: 7/8;
+}
+#casa25 {
+  grid-column: 6/7;
+  grid-row: 7/8;
+}
+#casa26 {
+  grid-column: 5/6;
+  grid-row: 7/8;
+}
+#casa27 {
+  grid-column: 4/5;
+  grid-row: 7/8;
+}
+#casa28 {
+  grid-column: 3/4;
+  grid-row: 7/8;
+}
+#casa29 {
+  grid-column: 2/3;
+  grid-row: 7/8;
+}
+#casa30 {
+  grid-column: 1/2;
+  grid-row: 7/8;
+}

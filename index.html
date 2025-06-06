@@ -1,26 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Byte & Board</title>
-    <link rel="stylesheet" href="indexStyle.css" />
-    <link rel="stylesheet" href="posicoesCasa.css" />
-    <link rel="stylesheet" href="chefes/chefe1/chefe.css" />
-  </head>
-  <body>
-    <div class="container">
-      <h1>Byte & Board</h1>
-    </div>
-    <div class="tabuleiro" id="tabuleiro"></div>
-    <div class="inf">
-      <div class="user">
-        <h1>player</h1>
-      </div>
-      <div class="dado">
-
-      </div>
-    </div>
-    <script src="IndexScript.js"></script>
-  </body>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Byte & Board Game Manual</title>
+  <link rel="stylesheet" href="manual.css">
+</head>
+<body>
+  <div class="manual-container">
+    <h1>Byte & Board Game Manual</h1>
+    <section>
+      <h2>Welcome</h2>
+      <p>Welcome to Byte & Board, a digital board game about computer science and phrasal verbs!</p>
+    </section>
+    <section>
+      <h2>Game Objective</h2>
+      <p>Be the first player to reach the FINAL square, overcoming challenges, bosses, and obstacles along the way.</p>
+    </section>
+    <section>
+      <h2>Components</h2>
+      <ul>
+        <li>Board with 31 squares (0 to 30)</li>
+        <li>4 colored pawns (one for each player)</li>
+        <li>Special squares: <span class="boss">Bosses (red)</span>, <span class="prize">Prizes (blue)</span>, <span class="penalty">Penalties (yellow)</span>, <span class="neutral">Neutral (gray)</span></li>
+        <li>Virtual dice</li>
+        <li>Boss fight modal</li>
+      </ul>
+    </section>
+    <section>
+      <h2>How to Play</h2>
+      <ol>
+        <li>Players take turns rolling the virtual dice (click the <span class="dice">🎲</span> button).</li>
+        <li>The pawn advances the number of squares rolled.</li>
+        <li>When landing on a special square:
+          <ul>
+            <li><span class="prize">Prize Square (blue/🛡️):</span> Gain a FIREWALL (protection in the next boss fight).</li>
+            <li><span class="penalty">Penalty Square (yellow/⚠️):</span> Move back a random number of squares (1 to 6).</li>
+            <li><span class="boss">Boss Square (red/👹):</span> Start a boss fight (modal).</li>
+            <li><span class="neutral">Neutral Square (gray):</span> Nothing happens.</li>
+          </ul>
+        </li>
+        <li><strong>Boss Fight:</strong>
+          <ul>
+            <li>A challenge about computer science phrasal verbs appears in the center of the screen.</li>
+            <li>Type the correct answer to defeat the boss and advance.</li>
+            <li>If you make a mistake, try again until you get it right.</li>
+            <li>If you have a FIREWALL, one mistake is forgiven.</li>
+            <li>You cannot advance without defeating the boss.</li>
+          </ul>
+        </li>
+        <li>The game ends when a player reaches the FINAL square (30).</li>
+      </ol>
+    </section>
+    <section>
+      <h2>Special Rules</h2>
+      <ul>
+        <li>You cannot skip boss squares: if the dice roll would pass a boss, the pawn stops at the boss square.</li>
+        <li>The FIREWALL is automatically consumed if you make a mistake in the boss fight.</li>
+        <li>The turn only passes to the next player after resolving the penalty or defeating the boss.</li>
+        <li>All game messages are in English, except this manual (if in Portuguese).</li>
+      </ul>
+    </section>
+    <section>
+      <h2>Tips</h2>
+      <ul>
+        <li>Phrasal verbs are common English expressions in computer science, such as: <em>log in, back up, set up, scroll down, plug in, shut down, look up, break down</em>.</li>
+        <li>Read the boss challenge carefully and try to remember the computer science context.</li>
+      </ul>
+    </section>
+    <footer>
+      <p>Have fun and learn while playing!</p>
+      <a href="jogo.html" class="back-btn">Start Playing →</a>
+    </footer>
+  </div>
+</body>
 </html>

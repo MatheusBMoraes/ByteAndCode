@@ -1,0 +1,94 @@
+body {
+  background: url('assets/bg.jpg') center/cover no-repeat fixed;
+  min-height: 100vh;
+  margin: 0;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  color: #f3f3f3;
+}
+
+.manual-container {
+  background: rgba(30, 32, 40, 0.92);
+  max-width: 700px;
+  margin: 40px auto 24px auto;
+  border-radius: 18px;
+  box-shadow: 0 6px 32px #0008;
+  padding: 36px 32px 28px 32px;
+  border: 2px solid #3a4a7a;
+}
+
+h1 {
+  text-align: center;
+  font-size: 2.3rem;
+  color: #7ecbff;
+  margin-bottom: 18px;
+  letter-spacing: 1px;
+}
+
+h2 {
+  color: #ffb347;
+  margin-top: 28px;
+  margin-bottom: 10px;
+  font-size: 1.3rem;
+}
+
+ul, ol {
+  margin-left: 1.2em;
+  margin-bottom: 0.7em;
+}
+
+li {
+  margin-bottom: 0.4em;
+  line-height: 1.5;
+}
+
+.boss {
+  color: #ff4c4c;
+  font-weight: bold;
+}
+.prize {
+  color: #7ecbff;
+  font-weight: bold;
+}
+.penalty {
+  color: #ffe066;
+  font-weight: bold;
+}
+.neutral {
+  color: #b0b0b0;
+  font-weight: bold;
+}
+.dice {
+  font-size: 1.2em;
+}
+footer {
+  text-align: center;
+  margin-top: 32px;
+}
+.back-btn {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 8px 18px;
+  background: linear-gradient(90deg, #7ecbff 60%, #3a4a7a 100%);
+  color: #222;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  box-shadow: 0 2px 8px #0004;
+  transition: background 0.2s, color 0.2s;
+}
+.back-btn:hover {
+  background: linear-gradient(90deg, #ffb347 60%, #ff4c4c 100%);
+  color: #fff;
+}
+@media (max-width: 600px) {
+  .manual-container {
+    padding: 18px 6vw 18px 6vw;
+    max-width: 98vw;
+  }
+  h1 {
+    font-size: 1.3rem;
+  }
+  h2 {
+    font-size: 1.05rem;
+  }
+}
